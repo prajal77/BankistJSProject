@@ -135,11 +135,101 @@ logo.className = 'jonas'
 
 // Smooth scrolling
 const btnScrollTo = document.querySelector('.btn--scroll-to');
-const section1 = document.querySelector('section--1');
+const section1 = document.querySelector('#section--1');
 
 btnScrollTo.addEventListener('click', function (e) {
+  // get the coordinate of the element we want to scroll
+  // const slcords = section1.getBoundingClientRect();
+  // console.log(slcords);
+  // console.log(e.target.getBoundingClientRect());
+  // // boundingclientRect is relative to the viewpoint
+  // // We can get current scrolling position
+  // console.log('Current scroll (X/Y)', window.pageXOffset, pageYOffset);
+
+  // current height and width viewport
+  // console.log('height/Width viewport', document.documentElement.clientHeight,
+  //   document.documentElement.clientHeight);
+  // Scrolling
+  // Current position + current scroll
+  // window.scrollTo(slcords.left + window.pageXOffset,
+  //   slcords.top + window.pageYOffset);
+
+  /// passing an object 
+  // window.scrollTo({
+  //   left: slcords.left + window.pageXOffset,
+  //   top: slcords.top + window.pageYOffset,
+  //   behavior: 'smooth'
+  // })
+
+  // modern way
+  section1.scrollIntoView({ behavior: 'smooth' });
+});
+
+
+/*
+// ________________Event_______________________
+const h1 = document.querySelector('h1');
+
+const alertH1 = function (e) {
+  alert('addEventListener: Great! you are reading heading');
+  // remove the event after handling
+  // h1.removeEventListener('mouseenter', alertH1)
+
+}
+h1.addEventListener('mouseenter', alertH1)
+
+// remove the event after some time passout
+setTimeout(() => h1.removeEventListener('mouseenter', alertH1), 3000)
+
+// Attaching eventListener to an element
+// h1.onmouseenter = function (e) {
+//   alert('onmouseenter: You are reading the heading')
+// }
+
+
+// ----benefit of using of addeventlistener---
+// -it allows multiple event listeners to the same event
+// - we can remove  event handler if we don't need anymore
+
+
+*/
+
+
+// page navigation
+
+//select three links
+// using forEach to attach an event handler to each element
+// document.querySelectorAll('.nav__link').forEach(function (el) {
+//   el.addEventListener('click', function (e) {
+//     e.preventDefault();
+//     const id = this.getAttribute(('href'));
+//     console.log(id);
+//     document.querySelector(id).scrollIntoView({
+//       behavior: 'smooth'
+//     });
+
+//     // console.log('link');
+//   })
+// })
+
+// using event bubling to implement event delegation
+
+// 1. add event listener to common parent element that we interested in
+//  2. and in that evetn listener Determine what element originated the event 
+// using event.target to know where the event actually happenend
+
+document.querySelector('.nav__links').addEventListener('click', function (e) {
+  // console.log(e.target);
+  // matching strategy
+  // check target element match the element
+  if (e.target.classList.contains('nav__link')) {
+    e.preventDefault();
+    const id = e.target.getAttribute(('href'));
+    console.log(id);
+    document.querySelector(id).scrollIntoView({
+      behavior: 'smooth'
+    });
+    // console.log('link');
+  }
 
 })
-
-
-
