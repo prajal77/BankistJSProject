@@ -234,6 +234,7 @@ document.querySelector('.nav__links').addEventListener('click', function (e) {
 
 })
 
+/*
 // -------DOM Travaersing--------
 
 const h1 = document.querySelector('h1');
@@ -277,3 +278,38 @@ console.log(h1.parentElement.children);
   //change all the sibiling except the element itself
   if (el !== h1) el.style.transform = 'scale(0.5)';
 })
+*/
+
+// tabbled component
+const tabs = document.querySelectorAll('.operations__tab');
+const tabsConstainer = document.querySelector('.operations__tab-container');
+const tabsContent = document.querySelectorAll('.operations__content');
+
+// taking all the taps and attaching an event handler
+
+// tabs.forEach(t => t.addEventListener('click', () => console.log('TAB')));
+
+// using event delegations
+// for event delegation we need to attach event handler on the common parent element
+// of all the elements that we're interested in
+// we need the event to figure out where the click happended
+tabsConstainer.addEventListener('click', function (e) {
+  // matching stragies
+  // const clicked = e.target.parentElement;
+  const clicked = e.target.closest('.operations__tab');
+  console.log(clicked);
+  // ignore where the result is null
+  // guard clause
+  if (!clicked) return;//if not clicked element return
+  // Active tab
+  tabs.forEach(t => t.classList.remove('operations__tab--active'));
+
+  tabsContent.forEach(c => c.classList.remove('operations__content--active'))
+
+  clicked.classList.add('operations__tab--active');
+
+  // // Activate content area
+  document.querySelector(`.operations__content--${clicked.dataset.tab}`)
+    .classList.add('operations__content--active');
+
+});
