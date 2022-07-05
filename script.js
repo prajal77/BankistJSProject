@@ -233,3 +233,47 @@ document.querySelector('.nav__links').addEventListener('click', function (e) {
   }
 
 })
+
+// -------DOM Travaersing--------
+
+const h1 = document.querySelector('h1');
+
+// going downwards: child
+console.log(h1.querySelectorAll('.highlight'));
+// to get direct children
+console.log(h1.childNodes);//this gives every single nodes of every single
+//type that there exists
+
+console.log(h1.children);//html collection live collection, updated 
+
+// first and last element child
+h1.firstElementChild.style.color = 'white';
+h1.lastElementChild.style.color = 'red';
+
+// Going upwards: parents
+console.log(h1.parentNode);
+console.log(h1.parentElement);
+
+// parent element which is not direct parent 
+h1.closest('.header').style.background = 'var(--gradient-secondary)'
+// closest parent eleement that has the class "header" 
+// and its simpley applied all style to that element
+
+// querrySelector  finds element children no matter how dip on the DOM Tree
+// closest finds the parent element no matter how far up on the DOM treee
+
+// Going sideways: siblings
+console.log(h1.previousElementSibling);
+console.log(h1.nextElementSibling);
+
+// for nodes
+console.log(h1.previousSibling);
+console.log(h1.nextSibling);
+
+// all the sibling
+console.log(h1.parentElement.children);
+// spread into an array
+[...h1.parentElement.children].forEach(function (el) {
+  //change all the sibiling except the element itself
+  if (el !== h1) el.style.transform = 'scale(0.5)';
+})
